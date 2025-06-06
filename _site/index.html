@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","headline":"PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier","name":"PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier","url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=HEAD">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+
+      <style>
+  /* Hides the large default site header from the theme */
+  .site-header {
+    display: none;
+  }
+  
+  /* Hide the blue "pag" title that appears at the top */
+  .page-header {
+    display: none !important;
+  }
+  
+  /* Hide all potential GitHub Pages title elements */
+  h1.project-name,
+  .project-name,
+  .repository-name,
+  .page-header h1,
+  .page-header .project-name,
+  .main-content h1:first-child,
+  header h1,
+  header .project-name,
+  .site-title,
+  .github-corner {
+    display: none !important;
+  }
+  
+  /* Hide any element containing just "pag" */
+  h1:contains("pag"),
+  h2:contains("pag"),
+  h3:contains("pag") {
+    display: none !important;
+  }
+  
+  /* More aggressive hiding - target by color and position */
+  h1[style*="color"],
+  h1[style*="blue"],
+  .page-header *,
+  .site-header *,
+  header * {
+    display: none !important;
+  }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.2em;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+  }
+  h2 {
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 400;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+  h3 {
+    text-align: center;
+    font-size: 1.3em;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #111;
+  }
+  .authors {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+  .affiliations {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .links {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .links a {
+    margin: 0 12px;
+    font-size: 1.2em;
+    text-decoration: none;
+    background-color: #f8f8f8;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+  }
+  .links a:hover {
+    background-color: #eee;
+    border-color: #ccc;
+  }
+  .teaser {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .teaser img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .section {
+    margin-bottom: 30px;
+  }
+  .bibtex {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    font-size: 0.9em;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .advantages-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .advantages-list li {
+    background: #f9f9f9;
+    padding: 15px;
+    border-left: 4px solid #007bff;
+    margin-bottom: 10px;
+    border-radius: 0 4px 4px 0;
+  }
+  .advantages-list strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.1em;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  th {
+    background-color: #f2f2f2;
+    font-weight: 500;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tbody td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+  .table-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .table-container table {
+    display: inline-table;
+    margin: 0 auto;
+  }
+</style>
+
+<div class="container">
+  <h1>PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative Verifier</h1>
+  
+  <div class="authors">
+    Yuhua Jiang<sup>1,*</sup>, Yuwen Xiong<sup>2</sup>, Yufeng Yuan<sup>2</sup>, Chao Xin<sup>2</sup>, Wenyuan Xu<sup>2</sup>, Yu Yue<sup>2</sup>, Qianchuan Zhao<sup>1</sup>, Lin Yan<sup>2</sup>
+  </div>
+  
+  <div class="affiliations">
+    <sup>1</sup>Tsinghua University&nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>ByteDance Seed<br />
+    <sup>*</sup>Work done at ByteDance Seed
+  </div>
+  
+  <div class="links">
+    <a href="assets/paper.pdf">[ 📄 PDF ]</a>
+    <a href="https://arxiv.org/abs/XXXX.XXXXX">[ 📝 arXiv ]</a>
+    <a href="#">[ 💻 Code (Coming Soon) ]</a>
+  </div>
+
+  <div class="background section">
+    <h2>What is Self-Correction?</h2>
+    <p><strong>Self-correction</strong> refers to the ability of Large Language Models (LLMs) to improve their own responses during inference without external feedback. The core idea is that LLMs often possess latent knowledge that is difficult to elicit through standard generation, yet self-correction can distill this hidden knowledge into improved outputs. However, existing approaches face significant challenges:</p>
+    <ul style="margin-left: 20px;">
+      <li><strong>Supervised Fine-Tuning (SFT) Limitations:</strong> Training self-correction via SFT suffers from distribution shift and limited generalization, as models learn to correct on curated data that may not reflect real-world error patterns.</li>
+      <li><strong>Model Collapse in Multi-Turn RL:</strong> Directly applying multi-turn reinforcement learning leads to "model collapse" - a phenomenon where the model's revised attempts show minimal deviation from initial responses, essentially failing to provide meaningful corrections.</li>
+      <li><strong>Complex Training Pipelines:</strong> Existing solutions like SCoRe require multi-stage training with warm-up phases to decouple the model's behavior across correction attempts, significantly complicating the training process.</li>
+    </ul>
+  </div>
+
+  <div class="method section">
+    <h2>Method: Policy as Generative Verifier (PAG)</h2>
+    
+    <p>We propose <strong>Policy as Generative Verifier (PAG)</strong>, a simple yet effective framework that addresses the fundamental challenges in LLM self-correction. PAG empowers LLMs to self-correct where a single model alternates between policy and generative verifier roles.</p>
+    
+    <p>The key innovation is a <strong>selective revision mechanism</strong>: instead of always generating a second attempt regardless of confidence, the model first acts as a generative verifier to check its initial solution, and only revises when an error is detected. This mechanism elegantly solves the model collapse problem without requiring complex multi-stage training or warm-up phases.</p>
+    
+    <div class="teaser">
+      <img src="assets/framework.png" alt="PAG Framework" />
+      <p style="text-align: center; margin-top: 10px; font-style: italic; color: #666;">
+        <strong>Figure 1:</strong> PAG framework showing the selective revision mechanism where a single model alternates between policy and generative verifier roles. The model only revises its answer when the verifier identifies an error, preventing model collapse.
+      </p>
+    </div>
+    
+    <p>The <strong>selective revision mechanism</strong> operates as follows:</p>
+    <ol style="margin-left: 20px;">
+      <li><strong>Initial Generation:</strong> The model generates an initial solution as the <strong>policy</strong></li>
+      <li><strong>Self-Verification:</strong> The same model switches to <strong>generative verifier</strong> role to critically evaluate its own solution</li>
+      <li><strong>Selective Revision:</strong> Only when the verifier detects an error does the model generate a revised answer</li>
+    </ol>
+    
+    <p>This mechanism prevents superficial revisions by requiring the model to <em>justify</em> why a revision is needed. If the model cannot identify a genuine error, it maintains confidence in its original answer. <strong>Multi-turn reinforcement learning (RL)</strong> is used to train both the verifier and policy capabilities within this mechanism, enabling the model to be trained directly from instruction-tuned models without any warm-up phases.</p>
+  </div>
+
+  <div class="advantages section">
+    <h2>Key Advantages Over Existing Methods</h2>
+    <ul class="advantages-list">
+      <li>
+        <strong>Solves Model Collapse Elegantly</strong>
+        Unlike SCoRe which requires multi-stage training with warm-up phases to prevent model collapse, PAG's selective revision mechanism naturally prevents superficial corrections. The model only revises when it genuinely identifies an error, eliminating the root cause of collapse.
+      </li>
+      <li>
+        <strong>Training Simplicity</strong>
+        PAG can be trained directly from instruction-tuned models without any warm-up phases or multi-stage procedures. This contrasts sharply with SCoRe's complex pipeline that requires careful orchestration of multiple training stages.
+      </li>
+      <li>
+        <strong>Unified Policy-Verifier Training</strong>
+        A single LLM seamlessly alternates between policy and verifier roles, jointly improving both reasoning and verification capabilities. This unified approach is more efficient than training separate models or components.
+      </li>
+      <li>
+        <strong>Superior Self-Correction Performance</strong>
+        PAG not only improves final self-correction accuracy but also enhances initial generation quality (Acc.@t1), demonstrating fundamental improvements in reasoning capabilities rather than just superficial correction skills.
+      </li>
+      <li>
+        <strong>Superior Self-Verification Performance</strong>
+        PAG's generative verifier achieves what few previous works have accomplished: our self-verify Best-of-N (BoN) selection consistently outperforms traditional majority voting (self-consistency). This demonstrates genuine verification ability rather than just aggregation heuristics.
+      </li>
+    </ul>
+  </div>
+
+  <div class="results section">
+    <h2>Key Results</h2>
+    <div>
+      <h3>Solving Model Collapse Through Selective Revision</h3>
+      <p>The training curves clearly demonstrate how PAG solves the model collapse problem. While baseline multi-turn RL methods quickly plateau as models learn to make superficial revisions, PAG maintains a high answer change ratio throughout training. This is because PAG only revises when the verifier genuinely detects an error, preventing the model from falling into the trap of meaningless corrections. The result is stable convergence and superior final accuracy.</p>
+      <div class="teaser">
+        <img src="assets/1p5policycurves.png" alt="Training Dynamics showing PAG vs baselines" style="max-width: 90%;" />
+      </div>
+    </div>
+    <div style="margin-top: 30px;">
+      <h3>Smarter Self-Verification</h3>
+      <p>At test time, using PAG's verifier to pick the Best-of-N (BoN) candidates consistently outperforms standard majority voting. This highlights PAG's ability to genuinely understand and verify solution correctness.</p>
+      <div class="teaser">
+        <img src="assets/scaling_genrm.png" alt="Self-Verify BoN vs Majority Voting" style="max-width: 70%;" />
+      </div>
+    </div>
+  </div>
+
+  <div class="tables section">
+    <h2>Performance Highlights</h2>
+    <h3>Performance on MATH (Qwen1.5-1.8B &amp; Llama3-8B)</h3>
+    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2" style="vertical-align: middle;">Method</th>
+          <th colspan="2">Qwen1.5-1.8B-Instruct</th>
+          <th colspan="2">Llama3-8B-Instruct</th>
+        </tr>
+        <tr>
+          <th>Acc.@t1</th>
+          <th>Acc.@final</th>
+          <th>Acc.@t1</th>
+          <th>Acc.@final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base model</td>
+          <td>53.2%</td>
+          <td>52.4%</td>
+          <td>28.7%</td>
+          <td>26.6%</td>
+        </tr>
+        <tr>
+          <td>Single Turn</td>
+          <td>61.6%</td>
+          <td>62.4%</td>
+          <td>32.4%</td>
+          <td>32.4%</td>
+        </tr>
+        <tr>
+          <td>Direct MultiTurn</td>
+          <td>62.1%</td>
+          <td>64.0%</td>
+          <td>33.3%</td>
+          <td>35.4%</td>
+        </tr>
+        <tr>
+          <td>SCoRe</td>
+          <td>61.9%</td>
+          <td>63.9%</td>
+          <td>32.0%</td>
+          <td>35.2%</td>
+        </tr>
+        <tr>
+          <td>Self-Rewarding</td>
+          <td>-</td>
+          <td>-</td>
+          <td>25.0%</td>
+          <td>29.4%</td>
+        </tr>
+        <tr>
+          <td><b>PAG (Ours)</b></td>
+          <td><b>62.2%</b></td>
+          <td><b>65.2%</b></td>
+          <td><b>35.1%</b></td>
+          <td><b>36.7%</b></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    
+    <h3>Performance on Diverse Benchmarks (Qwen2.5-7B-Instruct)</h3>
+    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>MATH500</th>
+          <th>MinervaMath</th>
+          <th>AIME24</th>
+          <th>AIME25</th>
+          <th>Average</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="6" style="background-color: #f2f2f2; font-weight: bold;">Qwen2.5-7B-Instruct (Base)</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@t1</td>
+          <td>76.0</td>
+          <td>35.9</td>
+          <td>11.1</td>
+          <td>7.6</td>
+          <td>32.7</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@final</td>
+          <td>76.1</td>
+          <td>35.6</td>
+          <td>11.8</td>
+          <td>7.8</td>
+          <td>32.8</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="background-color: #f2f2f2; font-weight: bold;">Single-Turn</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@t1</td>
+          <td>79.5</td>
+          <td>36.5</td>
+          <td>13.2</td>
+          <td>9.6</td>
+          <td>34.7</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@final</td>
+          <td>80.2</td>
+          <td>37.1</td>
+          <td>14.1</td>
+          <td>10.6</td>
+          <td>35.5</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="background-color: #f2f2f2; font-weight: bold;">Direct Multi-Turn</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@t1</td>
+          <td>80.0</td>
+          <td>35.3</td>
+          <td>15.8</td>
+          <td><u>11.9</u></td>
+          <td>35.8</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@final</td>
+          <td>81.2</td>
+          <td>35.4</td>
+          <td>17.3</td>
+          <td>13.8</td>
+          <td>36.9</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="background-color: #f2f2f2; font-weight: bold;">SCoRe</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@t1</td>
+          <td>79.5</td>
+          <td>36.7</td>
+          <td>13.1</td>
+          <td>10.0</td>
+          <td>34.8</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@final</td>
+          <td>81.5</td>
+          <td><b>37.7</b></td>
+          <td>16.6</td>
+          <td>14.0</td>
+          <td>37.4</td>
+        </tr>
+        <tr>
+          <td colspan="6" style="background-color: #f2f2f2; font-weight: bold;">PAG (Ours)</td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@t1</td>
+          <td><u>80.3</u></td>
+          <td><u>37.0</u></td>
+          <td><u>16.6</u></td>
+          <td>11.4</td>
+          <td><u>36.3</u></td>
+        </tr>
+        <tr>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;Acc.@final</td>
+          <td><b>82.3</b></td>
+          <td>37.2</td>
+          <td><b>18.4</b></td>
+          <td><b>15.1</b></td>
+          <td><b>38.3</b></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+    
+  <div class="citation section">
+    <h2>Citation</h2>
+    <p>If you find our work useful, please consider citing:</p>
+    <div class="bibtex">@article{jiang2024pag,
+  title={{PAG}: Multi-Turn Reinforced {LLM} Self-Correction with Policy as Generative Verifier},
+  author={Jiang, Yuhua and Xiong, Yuwen and Yuan, Yufeng and Xin, Chao and Xu, Wenyuan and Yue, Yu and Zhao, Qianchuan and Yan, Lin},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2024}
+}</div>
+  </div>
+
+</div>
+
+<script>
+// JavaScript to remove the blue "pag" title
+document.addEventListener('DOMContentLoaded', function() {
+  // Remove elements containing only "pag"
+  const allElements = document.querySelectorAll('*');
+  allElements.forEach(function(element) {
+    if (element.textContent && element.textContent.trim().toLowerCase() === 'pag') {
+      element.style.display = 'none';
+      element.remove();
+    }
+  });
+  
+  // Target specific selectors that might contain the title
+  const selectors = [
+    '.page-header',
+    '.project-name', 
+    '.repository-name',
+    'h1.project-name',
+    '.site-header',
+    'header h1',
+    '.main-content h1:first-child'
+  ];
+  
+  selectors.forEach(function(selector) {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach(function(element) {
+      if (element.textContent && element.textContent.trim().toLowerCase().includes('pag')) {
+        element.style.display = 'none';
+        element.remove();
+      }
+    });
+  });
+});
+</script>
+
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
