@@ -191,13 +191,15 @@ title: "PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative
   <h1>{{ page.title }}</h1>
   
   <div class="authors">
-    Yuhua Jiang<sup>1,*,✉</sup>, Yuwen Xiong<sup>2,✉</sup>, Yufeng Yuan<sup>2</sup>, Chao Xin<sup>2</sup>, Wenyuan Xu<sup>2</sup>, Yu Yue<sup>2</sup>, Qianchuan Zhao<sup>1</sup>, Lin Yan<sup>2</sup>
+    Yuhua Jiang<sup>1,*,†</sup>, Yuwen Xiong<sup>2,†</sup>, Yufeng Yuan<sup>2</sup>, Chao Xin<sup>2</sup>, Wenyuan Xu<sup>2</sup>, Yu Yue<sup>2</sup>, Qianchuan Zhao<sup>1</sup>, Lin Yan<sup>2</sup>
   </div>
   
   <div class="affiliations">
     <sup>1</sup>Tsinghua University&nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>ByteDance Seed<br>
     <sup>*</sup>Work done at ByteDance Seed<br>
+    <sup>†</sup>Equal contribution<br>
     <sup>✉</sup>Corresponding to: <a href="mailto:jiangyh22@mails.tsinghua.edu.cn">jiangyh22@mails.tsinghua.edu.cn</a>, <a href="mailto:yuwen.xiong@bytedance.com">yuwen.xiong@bytedance.com</a>
+
   </div>
   
   <div class="links">
