@@ -203,8 +203,8 @@ title: "PAG: Multi-Turn Reinforced LLM Self-Correction with Policy as Generative
   </div>
   
   <div class="links">
-    <a href="assets/paper.pdf">[ 📄 PDF ]</a>
-    <a href="https://arxiv.org/abs/XXXX.XXXXX">[ 📝 arXiv ]</a>
+    <a href="https://arxiv.org/pdf/2506.10406">[ 📄 PDF ]</a>
+    <a href="https://arxiv.org/abs/2506.10406">[ 📝 arXiv ]</a>
     <a href="#">[ 💻 Code (Coming Soon) ]</a>
   </div>
 
